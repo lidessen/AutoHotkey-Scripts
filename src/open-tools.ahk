@@ -9,6 +9,7 @@ return
 
 #c::
 Path := Explorer_GetSelection()
+Path := (Path = "" ? Clipboard : Path)
 Run, "code" %Path%
 return
 
