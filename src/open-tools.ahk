@@ -10,7 +10,32 @@ return
 #c::
 Path := Explorer_GetSelection()
 Path := (Path = "" ? Clipboard : Path)
-Run, "code" %Path%
+if(FileExist(Clipboard)) {
+   Run, "code" %Path%
+} else {
+   Run, "code"
+}
+return
+
+#e::
+if(FileExist(Clipboard)) {
+   run, Explore %Clipboard%
+} else {
+   run, Explore C:\Repos
+}
+return
+
+#s::
+try {
+   run, www.bing.com/search?q=%Clipboard%
+} catch e {
+   run, www.bing.com
+}
+
+return
+
+!g::
+run, www.github.com
 return
 
 Explorer_GetSelection() {
@@ -26,11 +51,3 @@ Explorer_GetSelection() {
       result := oShellFolderView.Folder.Self.Path
    Return result
 }
-
-#e::
-run, Explore %Clipboard%
-return
-
-#s::
-run, www.bing.com/search?q=%Clipboard%
-return
